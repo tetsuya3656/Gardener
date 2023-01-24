@@ -15,8 +15,12 @@ Rails.application.routes.draw do
     resources :follows, only: [:followers, :followings]
     resources :questions, only: [:new, :index, :show, :edit]
     resources :post_images, only: [:new, :index, :show, :edit]
-    resources :users, only: [:show, :edit, :unsubscribe]
+    resources :users, only: [:show, :edit, :update, :unsubscribe]
     
+    # 退会確認画面
+  get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+  # 論理削除用のルーティング
+  patch '/users/:id/withdraw' => 'users#withdraw', as: 'withdraw'
   end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

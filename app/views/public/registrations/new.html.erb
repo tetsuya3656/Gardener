@@ -14,8 +14,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :お住まい %><br>
-    <%= f.text_field :address %>
+    <%= f.label :お住まい %><br />  
+    <%= f.select :address, User.addresses.keys, {prompt: '選択してください'}, class: 'form-control btn btn-info' %>
   </div>
 
   <div class="field">
