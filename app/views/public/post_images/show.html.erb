@@ -1,2 +1,14 @@
-<h1>Public::PostImages#show</h1>
-<p>Find me in app/views/public/post_images/show.html.erb</p>
+<h1>投稿詳細</h1>
+<h4>画像</h4>
+
+<h4>投稿日時</h4>
+<h4>いいね</h4>
+<%= @post_image.caption %>
+
+<h4>コメント投稿フォームとコメントボタン</h4>
+<h4>コメント一覧</h4>
+
+<%# current_userのみ表示する %>
+<%= link_to "投稿内容を編集する", edit_post_image_path(@post_image) %>
+<%= link_to "投稿を削除する", user_path(current_user) %>
+
