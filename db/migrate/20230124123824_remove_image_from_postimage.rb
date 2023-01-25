@@ -1,5 +1,5 @@
 class RemoveImageFromPostimage < ActiveRecord::Migration[6.1]
   def change
-    remove_column :postimages, :image, :string
+    remove_column :post_images, :image, :string
   end
 end
