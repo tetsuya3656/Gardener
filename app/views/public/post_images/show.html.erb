@@ -1,7 +1,12 @@
 <h1>投稿詳細</h1>
-<h4>画像</h4>
 
-<h4>投稿日時</h4>
+  <%= image_tag @post_image.user.get_profile_image %>
+  <%= @post_image.user.name %>
+  <%= @post_image.created_at %>
+  
+  <%= image_tag @post_image.get_image %>
+
+
 <h4>いいね</h4>
 <%= @post_image.caption %>
 
