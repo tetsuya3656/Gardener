@@ -1,2 +1,10 @@
-<h1>タイムライン</h1>
+<h1>投稿一覧</h1> <%# ここで投稿を検索できるようにする %>
+
+<% @post_images.each do |post_image| %>
+  <%= link_to user_path(post_image.user.id) do %>
+    <%= image_tag post_image.user.get_profile_image(100,100) %>
+  <% end %>
+  <%= post_image.caption %>
+  <hr>
+<% end %>
 

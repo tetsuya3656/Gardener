@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:index]
     resources :follows, only: [:followers, :followings]
     resources :questions, only: [:new, :index, :show, :edit]
-    resources :post_images, only: [:new, :index, :show, :edit]
+    resources :post_images, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :users, only: [:show, :edit, :update, :unsubscribe]
     
     # 退会確認画面
