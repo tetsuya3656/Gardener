@@ -1,2 +1,9 @@
-<h1>Public::Questions#show</h1>
-<p>Find me in app/views/public/questions/show.html.erb</p>
+<h2><%= @question.title %></h2>
+<%= image_tag @question.get_image %>
+<%= @question.body %>
+
+<%# current_userのみ以下表示 %>
+<h5>質問内容を編集</h5>
+<h5>質問を削除</h5>
+
+
