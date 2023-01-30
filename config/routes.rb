@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   root to: "homes#top"
   
   scope module: :public do
-    resources :question_comments, only: [:index]
-   
     resources :follows, only: [:followers, :followings]
-    resources :questions, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :questions, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+       resources :question_comments, only: [:create, :destroy]
+    end
     resources :post_images, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
        resources :post_comments, only: [:create, :destroy]
     end

@@ -19,6 +19,7 @@ class Public::QuestionsController < ApplicationController
 
   def show
      @question = Question.find(params[:id])
+     @question_comment = QuestionComment.new
   end
 
   def edit

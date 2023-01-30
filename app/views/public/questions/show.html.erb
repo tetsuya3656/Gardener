@@ -1,9 +1,32 @@
-<h2><%= @question.title %></h2>
+<%= image_tag @question.user.get_profile_image(50,50) %>
+<%= @question.user.name %><br>
+<%= @question.created_at.strftime('%Y/%m/%d') %><br>
+<h4><%= @question.title %></h4>
 <%= image_tag @question.get_image(10,10) %>
 <%= @question.body %>
 
-<%# current_userのみ以下表示 %>
-<h5>質問内容を編集</h5>
-<h5>質問を削除</h5>
+<div>
+  <%= form_with model: [@question, @question_comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントしてみましょう" %><br>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
+<h4>コメント一覧</h4>
+<div>
+  <p>コメント件数:<%= @question.question_comments.count %></p>
+  <% @question.question_comments.each do |question_comment| %>
+    <p><%= image_tag question_comment.user.get_profile_image(100,100) %></p>
+    <%= question_comment.user.name %>
+    <%= question_comment.created_at.strftime('%Y/%m/%d') %><br>
+    <%= question_comment.comment %>
+    <% if question_comment.user == current_user %>
+     　<%= link_to "削除", question_question_comment_path(question_comment.question,question_comment), method: :delete %>
+    <% end %>
+    <hr>
+  <% end %>
+</div>
+
+
+
 
 
