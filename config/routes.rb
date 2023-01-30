@@ -11,10 +11,12 @@ Rails.application.routes.draw do
   
   scope module: :public do
     resources :question_comments, only: [:index]
-    resources :post_comments, only: [:index]
+   
     resources :follows, only: [:followers, :followings]
-    resources :questions, only: [:new, :index, :show, :edit]
-    resources :post_images, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :questions, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :post_images, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+       resources :post_comments, only: [:create, :destroy]
+    end
     resources :users, only: [:show, :edit, :update, :unsubscribe]
     
     # 退会確認画面

@@ -1,5 +1,5 @@
 <h2><%= @question.title %></h2>
-<%= image_tag @question.get_image %>
+<%= image_tag @question.get_image(10,10) %>
 <%= @question.body %>
 
 <%# current_userのみ以下表示 %>

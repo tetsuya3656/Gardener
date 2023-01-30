@@ -2,6 +2,9 @@
 
 
 <% @questions.each do |question| %>
+  <%= image_tag question.user.get_profile_image(40,40) %>
+  <%= question.user.name %>
   <%= link_to question.title, question_path(question.user.id) %>
+ 
   <hr>
 <% end %>

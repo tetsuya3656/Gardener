@@ -6,7 +6,7 @@ class Public::QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user_id = current_user.id
-    if @queston.save
+    if @question.save
       redirect_to questions_path, notice:"質問が投稿されました。"
     else
       render :new
@@ -40,4 +40,9 @@ class Public::QuestionsController < ApplicationController
     @question.destroy
     redirect_to '/questions'
   end
+  
+  private
+  def question_params
+     params.require(:question).permit(:user_id, :image, :title, :body)
+  end   
 end

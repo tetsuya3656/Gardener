@@ -1,6 +1,6 @@
 #左側にプロフィール画像
 <div>
-  <p><%= @user.name %>&emsp;<%= "プロフィールを編集" %></p>
+  <p><%= @user.name %>&emsp;<%= link_to "プロフィールを編集", edit_post_image_path %></p>
   <p><%= image_tag @user.get_profile_image(40,40) %></p>
   <p><%= @user.address %></p>
   <p>投稿数&emsp;<%= link_to "投稿する", new_post_image_path %></p>

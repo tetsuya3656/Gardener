@@ -19,7 +19,7 @@ class Public::PostImagesController < ApplicationController
 
   def show
     @post_image = PostImage.find(params[:id])
-    
+    @post_comment = PostComment.new
   end
 
   def edit
@@ -27,7 +27,7 @@ class Public::PostImagesController < ApplicationController
   end
   
   def update
-    @postimage = PostImage.find(params[:id])
+    @post_image = PostImage.find(params[:id])
     if @post_image.update(post_image_params)
      redirect_to post_image_path(@post_image.id), notice:"投稿内容を編集しました。"
     else
