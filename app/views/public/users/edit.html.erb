@@ -1,11 +1,13 @@
 <h1>プロフィール編集</h1>
   <%= form_with model: @user do |f| %>
     <label for="inputName">ユーザーネーム</label>
-      <%= f.text_field :name, autofocus: true, id:"inputName",placeholder:"新しいユーザーネーム" %>
+      <%= f.text_field :name, autofocus: true, id:"inputName",placeholder:"新しいユーザーネーム" %><br>
     <label for="inputImage">プロフィール画像</label>
-      <%= f.file_field :profile_image, placeholder: "新しいプロフィール画像", accept:"image/*" %>
+      <%= f.file_field :profile_image, placeholder: "新しいプロフィール画像", accept:"image/*" %><br>
+    <label for="inputEmail">メールアドレス</label>
+    　<%= f.text_field :email, placeholder: "メールアドレス" %><br>
     <label for="inputAddress">お住まい</label>
-      <%= f.select :address, User.addresses.keys, {prompt: '選択してください'} %>
+      <%= f.select :address, User.addresses.keys, {prompt: '選択してください'} %><br>
     <%= f.submit '編集内容を保存' %>
   <% end %>     
 

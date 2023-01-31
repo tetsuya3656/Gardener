@@ -18,7 +18,11 @@ Rails.application.routes.draw do
        resources :post_comments, only: [:create, :destroy]
        resource :favorites, only: [:create, :destroy]
     end
-    resources :users, only: [:show, :edit, :update, :unsubscribe]
+    resources :users, only: [:show, :edit, :update, :unsubscribe] do
+      resource :follows, only: [:create, :destroy]
+      get 'followings' => 'follows#followings', as: 'followings'
+      get 'followers' => 'follows#followers', as: 'followers'
+    end  
     
     # 退会確認画面
   get '/users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'

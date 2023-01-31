@@ -3,11 +3,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         has_many :post_images, dependent: :destroy
-         has_many :questions, dependent: :destroy
-         has_many :post_comments, dependent: :destroy
-         has_many :question_comments, dependent: :destroy
-         has_many :favorites, dependent: :destroy
+  has_many :post_images, dependent: :destroy
+  has_many :questions, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
+  has_many :question_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
+  has_many :following_user, through: :follows, source: :followed
+  has_many :follower_user, through: :reverse_of_follows, source: :follower
+         
   has_one_attached :profile_image
   
   
@@ -31,5 +36,19 @@ class User < ApplicationRecord
      福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46, 
      沖縄県:47
   }
+
+
+# フォローしたときの処理
+  def follow(user_id)
+    follower.create(followed_id: user_id)
+  end
+  # フォローを外すときの処理
+  def unfollow(user_id)
+    follows.find_by(followed_id: user_id).destroy
+  end
+  # フォローしているか判定
+  def following?(user)
+    following_user.include?(user)
+  end
   
 end
