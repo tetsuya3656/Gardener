@@ -1,4 +1,4 @@
-#左側にプロフィール画像
+
 <div>
   <p><%= @user.name %>&emsp;<%= link_to "プロフィールを編集", edit_user_path %></p>
   <% if current_user.following?(@user) %>
@@ -8,15 +8,20 @@
   <% end %>
   
   <%= link_to user_followings_path(@user) do %>
-  <h6>フォロー<%= @following_users.count %></h6>
+  <h6>フォロー<%= @user.followings.count %></h6>
   <% end %>
   <%= link_to user_followers_path(@user) do %>
-  <h6>フォロワー<%= @follower_users.count %></h6>
+  <h6>フォロワー<%= @user.followers.count %></h6>
   <% end %>
      
-  <p><%= image_tag @user.get_profile_image(40,40) %></p>
+  <p><%= image_tag @user.get_profile_image %></p>
   <p><%= @user.address %></p>
-  <p>投稿数&emsp;<%= link_to "投稿する", new_post_image_path %></p>
+  <p>投稿数
+  <%= link_to post_image_path(current_user) do %>
+    <%= @user.post_images.count %>
+  <% end %>
+  &emsp;
+  <%= link_to "投稿する", new_post_image_path %></p>
   <p>質問数&emsp;<%= link_to "質問する", new_question_path %></p>
   <p>フォロー数</p>
   <p>フォロワー数</p>

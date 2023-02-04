@@ -1,8 +1,14 @@
 class Public::UsersController < ApplicationController
+  
+  
+  def index
+    @users = User.all
+    @users = @users.where('name LIKE ?', "%#{params[:search]}%") if params[:search].present?
+  end
+  
   def show
     @user = User.find(params[:id])
-    @following_users = @user.following_user
-    @follower_users = @user.follower_user
+    
   end
 
   def edit
@@ -26,12 +32,20 @@ class Public::UsersController < ApplicationController
     reset_session
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to root_path
-  end  
+  end 
   
+  def favorites
+    @user = User.find_by(id: params[:id])
+    @favorites = Favorite.where(user_id: @user.id)
+    
+  end
   
+   
   
   private
   def user_params
     params.require(:user).permit(:name, :profile_image, :email, :encrypted_password, :address, :is_deleted)
   end
+  
+  
 end

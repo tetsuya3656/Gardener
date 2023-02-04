@@ -1,10 +1,10 @@
 <h1>投稿詳細</h1>
   
-  <%= image_tag @post_image.user.get_profile_image(50,50) %>
+  <%= image_tag @post_image.user.get_profile_image %>
   <%= @post_image.user.name %><br>
   <%= @post_image.created_at.strftime('%Y/%m/%d') %><br>
   
-  <%= image_tag @post_image.get_image(20,20) %>
+  <%= image_tag @post_image.get_image %>
 
     <% if @post_image.favorited_by?(current_user) %>
     <p>
@@ -31,7 +31,7 @@
 <div>
   <p>コメント件数:<%= @post_image.post_comments.count %></p>
   <% @post_image.post_comments.each do |post_comment| %>
-    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+    <p><%= image_tag post_comment.user.get_profile_image %></p>
     <%= post_comment.user.name %>
     <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
     <%= post_comment.comment %>

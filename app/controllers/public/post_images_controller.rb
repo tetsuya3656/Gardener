@@ -15,6 +15,7 @@ class Public::PostImagesController < ApplicationController
    
   def index
     @post_images = PostImage.all
+    @post_images = @post_images.where('caption LIKE ?', "%#{params[:search]}%") if params[:search].present?
   end
 
   def show
@@ -39,6 +40,12 @@ class Public::PostImagesController < ApplicationController
     @post_image = PostImage.find(params[:id])
     @post_image.destroy
     redirect_to '/post_images'
+  end
+  
+  def search
+    @post_images = PostImage.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
   end
   
   private

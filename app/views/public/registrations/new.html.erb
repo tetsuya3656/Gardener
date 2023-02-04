@@ -1,6 +1,6 @@
 <h2>新規登録</h2>
 
-<%= form_for(resource, as: resource_name, url: user_registration_path()) do |f| %>
+<%= form_with model: @user, url: user_registration_path do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
   
   <div class="field">
@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :お住まい %><br />  
-    <%= f.select :address, User.addresses.keys, {prompt: '選択してください'}, class: 'form-control btn btn-info' %>
+    <%= f.select :address, User.addresses.keys, {prompt: '選択してください'} %>
   </div>
 
   <div class="field">

@@ -1,8 +1,13 @@
 <h1>質問一覧</h1>
-
+<div class="search-form">
+  <%= form_with url: questions_path, method: :get, local: true do |f| %>
+  <%= f.text_field :search %>
+  <%= f.submit "検索", name: nil %>
+<% end %>
+</div>
 
 <% @questions.each do |question| %>
-  <%= image_tag question.user.get_profile_image(40,40) %>
+  <%= image_tag question.user.get_profile_image %>
   <%= question.user.name %>
   <%= link_to question.title, question_path(question.user.id) %>
  

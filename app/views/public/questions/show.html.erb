@@ -1,8 +1,8 @@
-<%= image_tag @question.user.get_profile_image(50,50) %>
+<%= image_tag @question.user.get_profile_image %>
 <%= @question.user.name %><br>
 <%= @question.created_at.strftime('%Y/%m/%d') %><br>
 <h4><%= @question.title %></h4>
-<%= image_tag @question.get_image(10,10) %>
+<%= image_tag @question.get_image %>
 <%= @question.body %>
 
 <div>
@@ -15,7 +15,7 @@
 <div>
   <p>コメント件数:<%= @question.question_comments.count %></p>
   <% @question.question_comments.each do |question_comment| %>
-    <p><%= image_tag question_comment.user.get_profile_image(100,100) %></p>
+    <p><%= image_tag question_comment.user.get_profile_image %></p>
     <%= question_comment.user.name %>
     <%= question_comment.created_at.strftime('%Y/%m/%d') %><br>
     <%= question_comment.comment %>

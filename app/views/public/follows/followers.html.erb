@@ -1,2 +1,7 @@
-<h1>Public::Follows#followers</h1>
-<p>Find me in app/views/public/follows/followers.html.erb</p>
+<h1>フォロワー一覧</h1>
+<% @users.each do |user| %>
+  <%= link_to user_path(user) do %>
+    <%= user.name %>
+    <%= image_tag user.get_profile_image %>
+  <% end %>
+<% end %>

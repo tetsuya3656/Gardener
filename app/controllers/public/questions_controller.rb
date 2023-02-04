@@ -15,6 +15,7 @@ class Public::QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    @questions = @questions.where('title LIKE ? OR body LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
   end
 
   def show
@@ -40,6 +41,12 @@ class Public::QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @question.destroy
     redirect_to '/questions'
+  end
+  
+  def searches
+    @questions = Question.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
   end
   
   private

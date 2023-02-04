@@ -10,11 +10,13 @@ class Question < ApplicationRecord
       end
     end
     
-    def get_image(width, height)
+    def get_image
       unless image.attached?
         file_path = Rails.root.join('app/assets/images/no_image.jpg')
         iamge.attach(io:File.open(file_path),filename: 'default-image.jpg', content_type: 'image/jpeg')
       end
-        image
+        image.variant(resize_to_limit: [300, 300]).processed
     end
+    
+    
 end

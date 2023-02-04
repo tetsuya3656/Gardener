@@ -1,10 +1,20 @@
 <h1>投稿一覧</h1> <%# ここで投稿を検索できるようにする %>
+<div class="search-form">
+  <%= form_with url: post_images_path, method: :get, local: true do |f| %>
+  <%= f.text_field :search %>
+  <%= f.submit "検索", name: nil %>
+<% end %>
+</div>
+
 
 <% @post_images.each do |post_image| %>
-  <%= link_to user_path(post_image.user.id) do %>
-    <%= image_tag post_image.user.get_profile_image(100,100) %>
+  
+  <%= link_to post_image_path(post_image.id) do %>
+    <%= image_tag post_image.get_image %>
   <% end %>
-  <%= post_image.caption %>
+  <%= post_image.caption %><br>
+  <%= link_to post_image.user.name, user_path(post_image.user.id) %><br>
+  <%= post_image.created_at.strftime('%Y/%m/%d') %>
   <hr>
 <% end %>
 

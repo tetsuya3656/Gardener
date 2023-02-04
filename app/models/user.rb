@@ -9,19 +9,19 @@ class User < ApplicationRecord
   has_many :question_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
-  has_many :reverse_of_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
-  has_many :following_user, through: :follows, source: :followed
-  has_many :follower_user, through: :reverse_of_follows, source: :follower
+  has_many :reverse_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
+  has_many :followings, through: :follows, source: :followed
+  has_many :followers, through: :reverse_follows, source: :follower
          
   has_one_attached :profile_image
   
   
-  def get_profile_image(width, height)
+  def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(resize_to_limit: [width, height]).processed
+    profile_image.variant(resize_to_limit: [100, 100]).processed
   end
   
  enum address: {
@@ -38,9 +38,9 @@ class User < ApplicationRecord
   }
 
 
-# フォローしたときの処理
+  # フォローしたときの処理
   def follow(user_id)
-    follower.create(followed_id: user_id)
+    follows.create(followed_id: user_id)
   end
   # フォローを外すときの処理
   def unfollow(user_id)
@@ -48,7 +48,7 @@ class User < ApplicationRecord
   end
   # フォローしているか判定
   def following?(user)
-    following_user.include?(user)
+    followings.include?(user)
   end
   
 end
