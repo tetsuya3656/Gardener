@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  before_action :reject_inactive_user, only: [:create]
   before_action :set_user, only: [:favorites]
   
   def index
