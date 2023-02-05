@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  
+  before_action :set_user, only: [:favorites]
   
   def index
     @users = User.all
@@ -35,17 +35,17 @@ class Public::UsersController < ApplicationController
   end 
   
   def favorites
+    @favorite_post_images = PostImage.where(user_id: @user.id)
     @user = User.find_by(id: params[:id])
-    @favorites = Favorite.where(user_id: @user.id)
     
   end
-  
-   
   
   private
   def user_params
     params.require(:user).permit(:name, :profile_image, :email, :encrypted_password, :address, :is_deleted)
   end
   
-  
+  def set_user
+    @user = User.find(params[:id])
+  end
 end

@@ -9,18 +9,20 @@
     <% if @post_image.favorited_by?(current_user) %>
     <p>
       <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
-        ♥<%= @post_image.favorites.count %> いいね
+        ♥ <%= @post_image.favorites.count %>
       <% end %>
-    </p>
+    </p></br>
+    <%= link_to "いいね一覧", favorites_user_path(@post_image) %>
     <% else %>
     <p>
       <%= link_to post_image_favorites_path(@post_image), method: :post do %>
-        ♡<%= @post_image.favorites.count %> いいね
+        ♡<%= @post_image.favorites.count %> 
       <% end %>
-    </p>
+    </p></br>
+    <%= link_to "いいね一覧", favorites_user_path(@post_image) %>
     <% end %>
 <%= @post_image.caption %>
-
+<hr>
 <div>
   <%= form_with model: [@post_image, @post_comment] do |f| %>
     <%= f.text_area :comment, rows: '5', placeholder: "コメントしてみましょう" %><br>

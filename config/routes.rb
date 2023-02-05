@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
-
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#new_guest'
+  end
+  
   get 'homes/top'
   root to: "homes#top"
   
@@ -26,8 +29,10 @@ Rails.application.routes.draw do
       resource :follows, only: [:create, :destroy]
       get 'followings' => 'follows#followings', as: 'followings'
       get 'followers' => 'follows#followers', as: 'followers'
-      get 'users/:id/favorites' => 'users#favorites', as: 'favorites'
-      
+      member do
+        get :favorites
+     end  
+     
     end  
     
       # 退会確認画面
