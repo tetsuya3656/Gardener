@@ -3,4 +3,6 @@
 <% @favorite_post_images.each do |favorite_post_image| %>
   <%= image_tag favorite_post_image.user.get_profile_image %>
   <%= favorite_post_image.user.name %>
+  <hr>
+  </br>
 <% end %>
